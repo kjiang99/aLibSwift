@@ -8,12 +8,35 @@
 
 /* Begin PBXBuildFile section */
 		D753F9212309F42400C0CAEB /* aLibSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = D753F91F2309F42400C0CAEB /* aLibSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D753F92E2309F50F00C0CAEB /* aLibSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D753F92D2309F50E00C0CAEB /* aLibSwiftTests.swift */; };
+		D753F9302309F50F00C0CAEB /* aLibSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D753F91C2309F42400C0CAEB /* aLibSwift.framework */; };
+		D753F9372309F55000C0CAEB /* IOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D753F9362309F55000C0CAEB /* IOTests.swift */; };
+		D753F941230A262C00C0CAEB /* images.json in Resources */ = {isa = PBXBuildFile; fileRef = D753F93F230A262C00C0CAEB /* images.json */; };
+		D753F942230A262C00C0CAEB /* image.json in Resources */ = {isa = PBXBuildFile; fileRef = D753F940230A262C00C0CAEB /* image.json */; };
+		D753F944230B8CEF00C0CAEB /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D753F943230B8CEF00C0CAEB /* NetworkTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D753F9312309F50F00C0CAEB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D753F9132309F42400C0CAEB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D753F91B2309F42400C0CAEB;
+			remoteInfo = aLibSwift;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		D753F91C2309F42400C0CAEB /* aLibSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = aLibSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D753F91F2309F42400C0CAEB /* aLibSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aLibSwift.h; sourceTree = "<group>"; };
 		D753F9202309F42400C0CAEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D753F92B2309F50E00C0CAEB /* aLibSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = aLibSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D753F92D2309F50E00C0CAEB /* aLibSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aLibSwiftTests.swift; sourceTree = "<group>"; };
+		D753F92F2309F50F00C0CAEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D753F9362309F55000C0CAEB /* IOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOTests.swift; sourceTree = "<group>"; };
+		D753F93F230A262C00C0CAEB /* images.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = images.json; sourceTree = "<group>"; };
+		D753F940230A262C00C0CAEB /* image.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = image.json; sourceTree = "<group>"; };
+		D753F943230B8CEF00C0CAEB /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -24,6 +47,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D753F9282309F50E00C0CAEB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D753F9302309F50F00C0CAEB /* aLibSwift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -31,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				D753F91E2309F42400C0CAEB /* aLibSwift */,
+				D753F92C2309F50E00C0CAEB /* aLibSwiftTests */,
 				D753F91D2309F42400C0CAEB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -39,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				D753F91C2309F42400C0CAEB /* aLibSwift.framework */,
+				D753F92B2309F50E00C0CAEB /* aLibSwiftTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -50,6 +83,27 @@
 				D753F9202309F42400C0CAEB /* Info.plist */,
 			);
 			path = aLibSwift;
+			sourceTree = "<group>";
+		};
+		D753F92C2309F50E00C0CAEB /* aLibSwiftTests */ = {
+			isa = PBXGroup;
+			children = (
+				D753F9382309F7B000C0CAEB /* Resources */,
+				D753F92D2309F50E00C0CAEB /* aLibSwiftTests.swift */,
+				D753F92F2309F50F00C0CAEB /* Info.plist */,
+				D753F9362309F55000C0CAEB /* IOTests.swift */,
+				D753F943230B8CEF00C0CAEB /* NetworkTests.swift */,
+			);
+			path = aLibSwiftTests;
+			sourceTree = "<group>";
+		};
+		D753F9382309F7B000C0CAEB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D753F940230A262C00C0CAEB /* image.json */,
+				D753F93F230A262C00C0CAEB /* images.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -84,16 +138,38 @@
 			productReference = D753F91C2309F42400C0CAEB /* aLibSwift.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		D753F92A2309F50E00C0CAEB /* aLibSwiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D753F9332309F50F00C0CAEB /* Build configuration list for PBXNativeTarget "aLibSwiftTests" */;
+			buildPhases = (
+				D753F9272309F50E00C0CAEB /* Sources */,
+				D753F9282309F50E00C0CAEB /* Frameworks */,
+				D753F9292309F50E00C0CAEB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D753F9322309F50F00C0CAEB /* PBXTargetDependency */,
+			);
+			name = aLibSwiftTests;
+			productName = aLibSwiftTests;
+			productReference = D753F92B2309F50E00C0CAEB /* aLibSwiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		D753F9132309F42400C0CAEB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1030;
 				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = "Haojun Jiang";
 				TargetAttributes = {
 					D753F91B2309F42400C0CAEB = {
+						CreatedOnToolsVersion = 10.3;
+					};
+					D753F92A2309F50E00C0CAEB = {
 						CreatedOnToolsVersion = 10.3;
 					};
 				};
@@ -111,6 +187,7 @@
 			projectRoot = "";
 			targets = (
 				D753F91B2309F42400C0CAEB /* aLibSwift */,
+				D753F92A2309F50E00C0CAEB /* aLibSwiftTests */,
 			);
 		};
 /* End PBXProject section */
@@ -120,6 +197,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D753F9292309F50E00C0CAEB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D753F942230A262C00C0CAEB /* image.json in Resources */,
+				D753F941230A262C00C0CAEB /* images.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,7 +219,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D753F9272309F50E00C0CAEB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D753F944230B8CEF00C0CAEB /* NetworkTests.swift in Sources */,
+				D753F92E2309F50F00C0CAEB /* aLibSwiftTests.swift in Sources */,
+				D753F9372309F55000C0CAEB /* IOTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D753F9322309F50F00C0CAEB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D753F91B2309F42400C0CAEB /* aLibSwift */;
+			targetProxy = D753F9312309F50F00C0CAEB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		D753F9222309F42400C0CAEB /* Debug */ = {
@@ -308,6 +412,42 @@
 			};
 			name = Release;
 		};
+		D753F9342309F50F00C0CAEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4VTN42P3X9;
+				INFOPLIST_FILE = aLibSwiftTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.azurewebsites.jiang.aLibSwiftTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D753F9352309F50F00C0CAEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4VTN42P3X9;
+				INFOPLIST_FILE = aLibSwiftTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.azurewebsites.jiang.aLibSwiftTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -325,6 +465,15 @@
 			buildConfigurations = (
 				D753F9252309F42400C0CAEB /* Debug */,
 				D753F9262309F42400C0CAEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D753F9332309F50F00C0CAEB /* Build configuration list for PBXNativeTarget "aLibSwiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D753F9342309F50F00C0CAEB /* Debug */,
+				D753F9352309F50F00C0CAEB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
