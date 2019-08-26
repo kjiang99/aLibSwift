@@ -69,17 +69,50 @@ class IOTests: XCTestCase {
     }
     
     
-    func testJson() {
+    func testImageJson() {
         //https://stackoverflow.com/questions/19151420/load-files-in-xcode-unit-tests/31651573
         let bundle = Bundle(for: type(of: self))
         
         let images = try! [Image](bundle: bundle, fileName: "images")
-        let imagesUI = images.map {UIImage(data: $0.pngData)} //        let imageNames = images.map {$0.name}
-        assert(imagesUI.count == 10)
+        let imagesUI = images.map {UIImage(data: $0.pngData)}
+        let imageNames = images.map {$0.name}
+        assert(imagesUI.count == 10 && imageNames.count == 10)
         
         let image = try! Image(bundle: bundle, fileName: "image")
-        assert(image.name == "frog")
+        assert(image.name == "frog" && image.imageSize > 0)
     }
+    
+    
+    func testItunesJson() {
+        let bundle = Bundle(for: type(of: self))
+        let urlBeetles =  bundle.url(forResource: "itunesBeatles", withExtension: "json")!
+        let dataBeetles = try! Data(contentsOf: urlBeetles)
+        
+        let listBeetles = try! JSONDecoder().decode(TrackList.self, from: dataBeetles)
+        assert(listBeetles.results.count == 50)
+        
+        do {
+            guard let urlMozart =  bundle.url(forResource: "itunesMozartBadData", withExtension: "json") else { return }
+            let dataMozart = try Data(contentsOf: urlMozart)
+            let _ = try JSONDecoder().decode(TrackList.self, from: dataMozart)
+        } catch  {
+            print ("Error when decode Mozart json file: \(error)")
+        }
+    }
+}
+
+
+struct Track: Decodable {
+    let trackName: String
+    let artistName: String
+    let previewUrl: String
+    var url: URL {
+        return URL(string: previewUrl)!
+    }
+}
+
+struct TrackList: Decodable {
+    let results: [Track]
 }
 
 
@@ -96,6 +129,12 @@ struct Image: Decodable {
     let name: String
     let kind: Kind
     let pngData: Data
+    var imageSize: Int {
+        return Array(pngData).count
+//        get {
+//            return Array(pngData).count
+//        }
+    }
     
     init(bundle: Bundle, fileName: String) throws {
         guard let url =  bundle.url(forResource: fileName, withExtension: "json") else {
@@ -107,6 +146,7 @@ struct Image: Decodable {
         self = try decoder.decode(Image.self, from: data)
     }
 }
+
 
 extension Array where Element == Image {
     init(bundle: Bundle, fileName: String) throws {

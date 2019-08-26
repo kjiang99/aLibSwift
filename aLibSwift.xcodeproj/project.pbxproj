@@ -14,6 +14,8 @@
 		D753F941230A262C00C0CAEB /* images.json in Resources */ = {isa = PBXBuildFile; fileRef = D753F93F230A262C00C0CAEB /* images.json */; };
 		D753F942230A262C00C0CAEB /* image.json in Resources */ = {isa = PBXBuildFile; fileRef = D753F940230A262C00C0CAEB /* image.json */; };
 		D753F944230B8CEF00C0CAEB /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D753F943230B8CEF00C0CAEB /* NetworkTests.swift */; };
+		D795DDA923131AB800CD4582 /* itunesBeatles.json in Resources */ = {isa = PBXBuildFile; fileRef = D795DDA823131AB800CD4582 /* itunesBeatles.json */; };
+		D7B15DDE23136661003F2CC3 /* itunesMozartBadData.json in Resources */ = {isa = PBXBuildFile; fileRef = D7B15DDD23136661003F2CC3 /* itunesMozartBadData.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,8 @@
 		D753F93F230A262C00C0CAEB /* images.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = images.json; sourceTree = "<group>"; };
 		D753F940230A262C00C0CAEB /* image.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = image.json; sourceTree = "<group>"; };
 		D753F943230B8CEF00C0CAEB /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
+		D795DDA823131AB800CD4582 /* itunesBeatles.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = itunesBeatles.json; sourceTree = "<group>"; };
+		D7B15DDD23136661003F2CC3 /* itunesMozartBadData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = itunesMozartBadData.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,8 @@
 			children = (
 				D753F940230A262C00C0CAEB /* image.json */,
 				D753F93F230A262C00C0CAEB /* images.json */,
+				D795DDA823131AB800CD4582 /* itunesBeatles.json */,
+				D7B15DDD23136661003F2CC3 /* itunesMozartBadData.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -206,6 +212,8 @@
 			files = (
 				D753F942230A262C00C0CAEB /* image.json in Resources */,
 				D753F941230A262C00C0CAEB /* images.json in Resources */,
+				D7B15DDE23136661003F2CC3 /* itunesMozartBadData.json in Resources */,
+				D795DDA923131AB800CD4582 /* itunesBeatles.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -188,6 +188,7 @@ class NetworkTests: XCTestCase {
                     print("\(postResponse)\n")
                 }
                 
+                print("asynchronous task starts at: \(Date())")
                 expect.fulfill()
             }.resume()
             
@@ -195,6 +196,7 @@ class NetworkTests: XCTestCase {
         
         taskAuth.resume()
         wait(for: [expect], timeout: 10.0)
+        print("asynchronous task stops at: \(Date())")
     }
 }
 
