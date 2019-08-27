@@ -24,7 +24,8 @@ class NetworkTests: XCTestCase {
         
         let imageURL = URL(string: "http://vote1.azurewebsites.net/images/Return.jpg")!
         let imageData = try! Data(contentsOf: imageURL)
-        let image = UIImage(data: imageData)
+        let imageUI = UIImage(data: imageData)
+        assert(imageUI != nil)
         
         
         //let urlCookie = URL(string: "https://dorm2.azurewebsites.net")!
@@ -51,7 +52,7 @@ class NetworkTests: XCTestCase {
     
     
     
-    struct Student : Codable {
+    struct Student : Encodable {
         let id: Int
         let acadSessionId: Int
         let assignedDormRoomName : String
@@ -137,15 +138,15 @@ class NetworkTests: XCTestCase {
         let taskDownload = session.downloadTask(with: urlDownload)
         taskDownload.resume()
         
-        _ = XCTWaiter.wait(for: [expect], timeout: 30.0)
+        _ = wait(for: [expect], timeout: 30.0)
     }
     
     
-    struct User: Codable {
+    struct User: Encodable {
         let username: String
     }
     
-    struct Auth : Codable {
+    struct Auth : Decodable {
         let token : String
     }
     
