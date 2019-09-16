@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D716754F232E774D00A8F9C2 /* MultiThreadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D716754E232E774D00A8F9C2 /* MultiThreadTests.swift */; };
+		D716DA2C232D8E26008FEAA4 /* ClassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D716DA2B232D8E26008FEAA4 /* ClassTests.swift */; };
 		D753F9212309F42400C0CAEB /* aLibSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = D753F91F2309F42400C0CAEB /* aLibSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D753F92E2309F50F00C0CAEB /* aLibSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D753F92D2309F50E00C0CAEB /* aLibSwiftTests.swift */; };
 		D753F9302309F50F00C0CAEB /* aLibSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D753F91C2309F42400C0CAEB /* aLibSwift.framework */; };
 		D753F9372309F55000C0CAEB /* IOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D753F9362309F55000C0CAEB /* IOTests.swift */; };
 		D753F941230A262C00C0CAEB /* images.json in Resources */ = {isa = PBXBuildFile; fileRef = D753F93F230A262C00C0CAEB /* images.json */; };
@@ -29,11 +30,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D716754E232E774D00A8F9C2 /* MultiThreadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiThreadTests.swift; sourceTree = "<group>"; };
+		D716DA2B232D8E26008FEAA4 /* ClassTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassTests.swift; sourceTree = "<group>"; };
 		D753F91C2309F42400C0CAEB /* aLibSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = aLibSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D753F91F2309F42400C0CAEB /* aLibSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aLibSwift.h; sourceTree = "<group>"; };
 		D753F9202309F42400C0CAEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D753F92B2309F50E00C0CAEB /* aLibSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = aLibSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D753F92D2309F50E00C0CAEB /* aLibSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aLibSwiftTests.swift; sourceTree = "<group>"; };
 		D753F92F2309F50F00C0CAEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D753F9362309F55000C0CAEB /* IOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOTests.swift; sourceTree = "<group>"; };
 		D753F93F230A262C00C0CAEB /* images.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = images.json; sourceTree = "<group>"; };
@@ -93,10 +95,11 @@
 			isa = PBXGroup;
 			children = (
 				D753F9382309F7B000C0CAEB /* Resources */,
-				D753F92D2309F50E00C0CAEB /* aLibSwiftTests.swift */,
 				D753F92F2309F50F00C0CAEB /* Info.plist */,
 				D753F9362309F55000C0CAEB /* IOTests.swift */,
 				D753F943230B8CEF00C0CAEB /* NetworkTests.swift */,
+				D716DA2B232D8E26008FEAA4 /* ClassTests.swift */,
+				D716754E232E774D00A8F9C2 /* MultiThreadTests.swift */,
 			);
 			path = aLibSwiftTests;
 			sourceTree = "<group>";
@@ -231,9 +234,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D716DA2C232D8E26008FEAA4 /* ClassTests.swift in Sources */,
 				D753F944230B8CEF00C0CAEB /* NetworkTests.swift in Sources */,
-				D753F92E2309F50F00C0CAEB /* aLibSwiftTests.swift in Sources */,
 				D753F9372309F55000C0CAEB /* IOTests.swift in Sources */,
+				D716754F232E774D00A8F9C2 /* MultiThreadTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
