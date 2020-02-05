@@ -8,6 +8,8 @@
 
 import XCTest
 
+
+// MARK: - https://theswiftdev.com/2019/08/25/swift-init-patterns/
 struct PointStruct {
     var x: Int
     var y: Int
@@ -20,6 +22,31 @@ class Point {
     init(x: Int, y: Int) {
         self.x = x
         self.y = y
+    }
+    
+    convenience init(z: Int) {
+        self.init(x: z, y:z)
+    }
+}
+
+class NamedPoint: Point {
+    let label: String?
+
+    init(x: Int, y: Int, label: String?) { // designated
+        self.label = label
+        super.init(x: x, y: y)
+    }
+
+    init(point: Point, label: String?) { // also designated
+        self.label = label
+        super.init(x: point.x, y: point.y) // delegating up
+    }
+    
+    override init(x: Int, y: Int) {
+        self.label = nil
+
+        super.init(x: x, y: y)
+                self.x = 2
     }
 }
 
@@ -52,6 +79,10 @@ class ClassTests: XCTestCase {
         p3.x = 100
         p3.y = 101
         
-        print("p1: \(p1) \np2: \(p2) \np3: \(p3) ")
+        print("p1: \(p1) \np2: \(p2) \np3: \(p3)")
+        
+        let numberedP1 = NamedPoint(x: 1, y: 1, label: "first")
+        let numberedP2 = NamedPoint(point: Point(x: 1, y: 1), label: "second")
+        print("numberedP1: \(numberedP1) \nnumberedP2: \(numberedP2)")
     }
 }

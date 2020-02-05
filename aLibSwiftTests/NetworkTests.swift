@@ -95,37 +95,6 @@ class NetworkTests: XCTestCase {
     }
     
     
-    //https://medium.com/journey-of-one-thousand-apps/tracking-download-progress-with-swift-c1a13f3f8c66
-    class SessionDelegate: NSObject, URLSessionDownloadDelegate {
-        var expect: XCTestExpectation?
-        
-        func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-            print("downloadURL: \(location)\n")
-
-            guard let url = downloadTask.originalRequest?.url else { return }
-            
-            let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            let destinationURL = documentsPath.appendingPathComponent(url.lastPathComponent)
-            print("destinationURL: \(destinationURL)\n")
-
-            do {
-                try FileManager.default.removeItem(at: destinationURL)
-                try FileManager.default.copyItem(at: location, to: destinationURL) //After delegate ends, the downloaded file automatically deleted in temp folder
-                expect?.fulfill()
-            } catch let error {
-                print("Copy Error: \(error.localizedDescription)\n")
-            }
-        }
-        
-        func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64,totalBytesExpectedToWrite: Int64) {
-            let progress = round(Float(totalBytesWritten) / Float(totalBytesExpectedToWrite) * 100)
-            print("progress: \(progress) % \n")
-            // Gives you the URLSessionDownloadTask that is being executed
-            // along with the total file length - totalBytesExpectedToWrite
-            // and the current amount of data that has received up to this point - totalBytesWritten
-        }
-    }
-    
     func testDownloadLargeFile() {
         //let urlDownload = URL(string: "http://hccc.net/aaa.mpg")!
         let urlDownload = URL(string: "http://hccc.net/aaa.txt")!
@@ -138,7 +107,7 @@ class NetworkTests: XCTestCase {
         let taskDownload = session.downloadTask(with: urlDownload)
         taskDownload.resume()
         
-        _ = wait(for: [expect], timeout: 30.0)
+        wait(for: [expect], timeout: 30.0)
     }
     
     
@@ -202,6 +171,29 @@ class NetworkTests: XCTestCase {
 }
 
 
+//https://medium.com/journey-of-one-thousand-apps/tracking-download-progress-with-swift-c1a13f3f8c66
+class SessionDelegate: NSObject, URLSessionDownloadDelegate {
+    var expect: XCTestExpectation?
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        print("downloadURL: \(location)\n")
+
+        guard let url = downloadTask.originalRequest?.url else { return }
+        
+        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let destinationURL = documentsPath.appendingPathComponent(url.lastPathComponent)
+        print("destinationURL: \(destinationURL)\n")
+
+        try? FileManager.default.removeItem(at: destinationURL)
+        try? FileManager.default.copyItem(at: location, to: destinationURL) //After delegate ends, the downloaded file automatically deleted in temp folder
+        expect?.fulfill()
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64,totalBytesExpectedToWrite: Int64) {
+        let progress = round(Float(totalBytesWritten) / Float(totalBytesExpectedToWrite) * 100)
+        print("progress: \(progress) % \n")
+    }
+}
 
 
 

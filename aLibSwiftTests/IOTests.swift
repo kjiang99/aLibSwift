@@ -20,7 +20,6 @@ extension FileManager {
 
 class IOTests: XCTestCase {
     func testFileManager() {
-        //Important: May need to create Documents folder manually
         let documentPath1 = FileManager.documentDirectoryURL.path
         let documentPath2 = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.path
         assert(documentPath1 == documentPath2)
@@ -43,7 +42,6 @@ class IOTests: XCTestCase {
     
     
     func testReadWrite(){
-
         let mysteryBytes: [UInt8] = [
             240,          159,          152,          184,
             240,          159,          152,          185,
@@ -53,6 +51,8 @@ class IOTests: XCTestCase {
         
         let mysteryDataUrl = FileManager.documentDirectoryURL.appendingPathComponent("aaa.bbb").appendingPathExtension("txt")
         let mysteryData = Data(mysteryBytes)
+        
+        //Important: Need to create Documents folder manually. Otherwise will get error to save it
         try! mysteryData.write(to: mysteryDataUrl)
         
         let savedMysteryData = try! Data(contentsOf: mysteryDataUrl)
@@ -130,7 +130,9 @@ struct Image: Decodable {
     let kind: Kind
     let pngData: Data
     var imageSize: Int {
-        return Array(pngData).count
+        Array(pngData).count
+//        return Array(pngData).count
+        
 //        get {
 //            return Array(pngData).count
 //        }
