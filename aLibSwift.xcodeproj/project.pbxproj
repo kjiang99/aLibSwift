@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5BABFE3A24377D470079AED2 /* ClassTests2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BABFE3924377D460079AED2 /* ClassTests2.swift */; };
 		D716754F232E774D00A8F9C2 /* MultiThreadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D716754E232E774D00A8F9C2 /* MultiThreadTests.swift */; };
 		D716DA2C232D8E26008FEAA4 /* ClassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D716DA2B232D8E26008FEAA4 /* ClassTests.swift */; };
 		D753F9212309F42400C0CAEB /* aLibSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = D753F91F2309F42400C0CAEB /* aLibSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5BABFE3924377D460079AED2 /* ClassTests2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassTests2.swift; sourceTree = "<group>"; };
 		D716754E232E774D00A8F9C2 /* MultiThreadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiThreadTests.swift; sourceTree = "<group>"; };
 		D716DA2B232D8E26008FEAA4 /* ClassTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassTests.swift; sourceTree = "<group>"; };
 		D753F91C2309F42400C0CAEB /* aLibSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = aLibSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +101,7 @@
 				D753F9362309F55000C0CAEB /* IOTests.swift */,
 				D753F943230B8CEF00C0CAEB /* NetworkTests.swift */,
 				D716DA2B232D8E26008FEAA4 /* ClassTests.swift */,
+				5BABFE3924377D460079AED2 /* ClassTests2.swift */,
 				D716754E232E774D00A8F9C2 /* MultiThreadTests.swift */,
 			);
 			path = aLibSwiftTests;
@@ -234,6 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BABFE3A24377D470079AED2 /* ClassTests2.swift in Sources */,
 				D716DA2C232D8E26008FEAA4 /* ClassTests.swift in Sources */,
 				D753F944230B8CEF00C0CAEB /* NetworkTests.swift in Sources */,
 				D753F9372309F55000C0CAEB /* IOTests.swift in Sources */,

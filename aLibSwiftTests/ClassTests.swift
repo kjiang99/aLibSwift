@@ -93,11 +93,11 @@ class ClassTests: XCTestCase {
         
         let deviceSetting2 = DeviceSetting(speaker: "", international: "", pin: "", tutorialTime: "")
         XCTAssertNotNil(deviceSetting2)
+        XCTAssert(deviceSetting1.tutorialTime == nil)
         
         //let dev = DeviceSetting(speaker: <#T##String#>, international: <#T##String#>, access: <#T##String#>, pin: <#T##String?#>, tutorialTime: <#T##String?#>)
         
-        //let aaa: String = deviceSetting.pin  //Don't get compile error, but will get runtime error
-        //let aaa: String = deviceSetting.tutorialTime //Get compile error
+        //let aaa: String = deviceSetting1.pin  //Don't get compile error, but will get runtime error
     }
 }
 
