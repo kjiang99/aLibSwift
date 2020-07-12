@@ -9,6 +9,7 @@
 import XCTest
 
 class NetworkTests: XCTestCase {
+    
     func testSessionConfiguration() {
         let sharedSession = URLSession.shared
         let allowsCellularAccess1 = sharedSession.configuration.allowsCellularAccess
@@ -17,15 +18,19 @@ class NetworkTests: XCTestCase {
         let allowsCellularAccess2 = sharedSession.configuration.allowsCellularAccess
         assert(allowsCellularAccess2)
         
-//        let myDefaultConfiguration = URLSessionConfiguration.default
+        let myDefaultConfiguration = URLSessionConfiguration.default
+        myDefaultConfiguration.allowsCellularAccess = false //default is true
+        let myDefaultSession = URLSession(configuration: myDefaultConfiguration)
+        XCTAssert(myDefaultSession.configuration.allowsCellularAccess == false)
 //        let eConfig = URLSessionConfiguration.ephemeral
 //        let bConfig = URLSessionConfiguration.background(withIdentifier: "com.raywenderlich.sessions")
         
         
+        //Synchronous way to get an image
         let imageURL = URL(string: "http://vote1.azurewebsites.net/images/Return.jpg")!
         let imageData = try! Data(contentsOf: imageURL)
-        let imageUI = UIImage(data: imageData)
-        assert(imageUI != nil)
+        let uiImage = UIImage(data: imageData)
+        assert(uiImage != nil)
         
         
         //let urlCookie = URL(string: "https://dorm2.azurewebsites.net")!
@@ -34,10 +39,12 @@ class NetworkTests: XCTestCase {
         
         let expect = expectation(description: "expect")
         
-        URLSession.shared.dataTask(with: requestCookie) { (data, response, error) in
-            print ("\n")
-            if let httpResponse = response as? HTTPURLResponse,
-                let fields = httpResponse.allHeaderFields as? [String : String] {
+        sharedSession.dataTask(with: requestCookie) { (data, response, error) in
+            print ("\nCookies are:")
+            guard let httpResponse = response as? HTTPURLResponse,
+                (200..<300).contains(httpResponse.statusCode) else { return }
+            
+            if let fields = httpResponse.allHeaderFields as? [String : String] {
                 let cookies = HTTPCookie.cookies(withResponseHeaderFields: fields, for: urlCookie)
                 for cookie in cookies {
                     print("\(cookie.name)    \(cookie.value)")
@@ -51,7 +58,7 @@ class NetworkTests: XCTestCase {
     }
     
     
-    
+    // MARK: - testSessionDataTaskPost
     struct Student : Encodable {
         let id: Int
         let acadSessionId: Int
@@ -95,22 +102,7 @@ class NetworkTests: XCTestCase {
     }
     
     
-    func testDownloadLargeFile() {
-        //let urlDownload = URL(string: "http://hccc.net/aaa.mpg")!
-        let urlDownload = URL(string: "http://hccc.net/aaa.txt")!
-        
-        let sessionDelegate = SessionDelegate()
-        let expect = expectation(description: "expect")
-        sessionDelegate.expect = expect
-        
-        let session = URLSession(configuration: .default, delegate: sessionDelegate, delegateQueue: OperationQueue.main)
-        let taskDownload = session.downloadTask(with: urlDownload)
-        taskDownload.resume()
-        
-        wait(for: [expect], timeout: 30.0)
-    }
-    
-    
+    // MARK: - testTokenAuthentication
     struct User: Encodable {
         let username: String
     }
@@ -120,30 +112,30 @@ class NetworkTests: XCTestCase {
     }
     
     func testTokenAuthentication() {
+        let expect = expectation(description: "expect")
+        
         let user = User(username: "PowerUserB")
         let userJsonData = try! JSONEncoder().encode(user)
         
-        let urlLogin = URL(string: "https://dorm2.azurewebsites.net/api/Security/Authenticate/")!
-        var loginRequest = URLRequest(url: urlLogin)
+        let loginEndpointUrl = URL(string: "https://dorm2.azurewebsites.net/api/Security/Authenticate/")!
+        var loginRequest = URLRequest(url: loginEndpointUrl)
         loginRequest.httpMethod = "POST"
         loginRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         loginRequest.httpBody = userJsonData
         
-        let expect = expectation(description: "expect")
-        
         let session = URLSession(configuration: .default)
-        
+    
         let taskAuth = session.dataTask(with: loginRequest) { (data, response, error) in
             guard let data = data else { return }
             
-            if let postResponse = String(data: data, encoding: .utf8) {
-                print("\(postResponse)\n")
+            if let dataString = String(data: data, encoding: .utf8) {
+                print("\ndataString:\n\(dataString)\n")
             }
             
             let auth = try! JSONDecoder().decode(Auth.self, from: data)
 
-            let urlAuth = URL(string: "https://dorm2.azurewebsites.net/api/Security/GetClaims/")!
-            var tokenAuthRequest = URLRequest(url: urlAuth)
+            let claimEndpointUrl = URL(string: "https://dorm2.azurewebsites.net/api/Security/GetClaims/")!
+            var tokenAuthRequest = URLRequest(url: claimEndpointUrl)
             tokenAuthRequest.httpMethod = "GET"
             tokenAuthRequest.allHTTPHeaderFields = [
                 "accept": "application/json",
@@ -154,11 +146,10 @@ class NetworkTests: XCTestCase {
             session.dataTask(with: tokenAuthRequest) { (data, response, error) in
                 guard let data = data else { return }
                 
-                if let postResponse = String(data: data, encoding: .utf8) {
-                    print("\(postResponse)\n")
+                if let dataString = String(data: data, encoding: .utf8) {
+                    print("\ndataString:\n\(dataString)\n")
                 }
                 
-                print("asynchronous task starts at: \(Date())")
                 expect.fulfill()
             }.resume()
             
@@ -166,13 +157,30 @@ class NetworkTests: XCTestCase {
         
         taskAuth.resume()
         wait(for: [expect], timeout: 10.0)
-        print("asynchronous task stops at: \(Date())")
+    }
+    
+    
+
+    // MARK: - testDownloadLargeFile
+    func testDownloadLargeFile() {
+        //let urlDownload = URL(string: "http://hccc.net/aaa.mpg")!
+        let urlDownload = URL(string: "http://hccc.net/aaa.txt")!
+        
+        let sessionDelegate = DownloadSessionDelegate()
+        let expect = expectation(description: "expect")
+        sessionDelegate.expect = expect
+        
+        let session = URLSession(configuration: .default, delegate: sessionDelegate, delegateQueue: OperationQueue.main)
+        let taskDownload = session.downloadTask(with: urlDownload)
+        taskDownload.resume()
+        
+        wait(for: [expect], timeout: 30.0)
     }
 }
 
 
 //https://medium.com/journey-of-one-thousand-apps/tracking-download-progress-with-swift-c1a13f3f8c66
-class SessionDelegate: NSObject, URLSessionDownloadDelegate {
+class DownloadSessionDelegate: NSObject, URLSessionDownloadDelegate {
     var expect: XCTestExpectation?
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
