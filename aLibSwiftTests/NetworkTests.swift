@@ -34,6 +34,7 @@ class NetworkTests: XCTestCase {
         
         
         //let urlCookie = URL(string: "https://dorm2.azurewebsites.net")!
+        //let urlCookie = URL(string: "https://www.raywenderlich.com")!
         let urlCookie = URL(string: "http://www.amazon.com")!
         let requestCookie = URLRequest(url: urlCookie)
         
@@ -47,7 +48,17 @@ class NetworkTests: XCTestCase {
             if let fields = httpResponse.allHeaderFields as? [String : String] {
                 let cookies = HTTPCookie.cookies(withResponseHeaderFields: fields, for: urlCookie)
                 for cookie in cookies {
-                    print("\(cookie.name)    \(cookie.value)")
+                    print("cookie name:\(cookie.name)")
+                    print("cookie value:\(cookie.value)")
+                }
+                print ("\n")
+            }
+            
+            if let cookieJar = HTTPCookieStorage.shared.cookies {
+                print ("\nCookieStorage cookies are:")
+                for cookie in cookieJar {
+                    print("cookie name: \(cookie.name)")
+                    print("cookie value: \(cookie.value)")
                 }
             }
             
@@ -73,8 +84,8 @@ class NetworkTests: XCTestCase {
         let student = "{'id': '1','acadSessionId' :'1','assignedDormRoomName' : '101','isBoardingStudent' : 'true'}"
         let studentJsonData = student.data(using: .utf8)
         
-        let urlPost = URL(string: "https://dorm2.azurewebsites.net/api/Dorm/AssignStudentDormRoom/")!
-        var request = URLRequest(url: urlPost)
+        let assignStudentEndpointUrl = URL(string: "https://dorm2.azurewebsites.net/api/Dorm/AssignStudentDormRoom/")!
+        var request = URLRequest(url: assignStudentEndpointUrl)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = studentJsonData
@@ -90,8 +101,8 @@ class NetworkTests: XCTestCase {
                 return
             }
             
-            if let postResponse = String(data: data, encoding: .utf8) {
-                print("\(postResponse)\n")
+            if let dataString = String(data: data, encoding: .utf8) {
+                print("\ndataString:\n\(dataString)\n")
             }
             
             expect.fulfill()
@@ -122,6 +133,12 @@ class NetworkTests: XCTestCase {
         loginRequest.httpMethod = "POST"
         loginRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         loginRequest.httpBody = userJsonData
+//        let encodedString = userJsonData.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0))
+//        loginRequest.allHTTPHeaderFields = [
+//          "accept": "application/json",
+//          "content-type": "application/json",
+//          "authorization": "Basic \(encodedString)"
+//        ]
         
         let session = URLSession(configuration: .default)
     
