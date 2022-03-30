@@ -8,15 +8,66 @@
 
 import XCTest
 
+// MARK: - struct test
+struct DeviceSetting {
+    var speaker: String = "YES"
+    var international: String = "NO"
+    
+    let access: String = "AUTO"
+    var pin: String!
+    var tutorialTime: String?
+    
+    let useless: String? = nil  //let needs to set nil
+    var useless2: String? //var do not need to set nil
+    
+    var isSpeakerphoneOn: Bool {
+        speaker.uppercased() == "YES"
+    }
+    
+    var useInternational: Bool {
+        return international.uppercased() == "YES"
+    }
+}
+
+
 struct PointStruct {
     var x: Int
     var y: Int
+    let label: String? = nil  //let needs to set nil
+    var key: String? //var do not need to set nil
 }
+
+
+class StructTests: XCTestCase {
+    func testStruct() {
+        let deviceSetting1 = DeviceSetting()
+        XCTAssertNotNil(deviceSetting1)
+        
+        let deviceSetting2 = DeviceSetting(speaker: "", international: "", pin: "", tutorialTime: "")
+        XCTAssertNotNil(deviceSetting2)
+        XCTAssert(deviceSetting1.tutorialTime == nil)
+        
+        //let dev = DeviceSetting(speaker: <#T##String#>, international: <#T##String#>, access: <#T##String#>, pin: <#T##String?#>, tutorialTime: <#T##String?#>)
+        
+        //let aaa: String = deviceSetting1.pin  //Don't get compile error, but will get runtime error
+    }
+    
+    
+    func testPointStruct() {
+        let ps1 = PointStruct(x: 0, y: 0)
+        var ps2 = ps1
+        ps2.x = 42
+        ps2.y = 3
+        print("ps1: \(ps1) \nps2: \(ps2)")
+    }
+}
+
 
 class Point {
     var x: Int
     var y: Int
-    
+    var useless: Int?  //var do not need to set nil
+
     init(x: Int, y: Int) {
         self.x = x
         self.y = y
@@ -42,7 +93,7 @@ class NamedPoint: Point {
     
     override init(x: Int, y: Int) {
         self.label = nil
-        
+        //Cannot assign x before super init like self.x = 2
         super.init(x: x, y: y)
         self.x = 2
     }
@@ -63,13 +114,7 @@ extension Point: NSCopying {
 
 // MARK: - https://theswiftdev.com/2019/08/25/swift-init-patterns/
 class ClassTests: XCTestCase {
-    func testClassStructureType() {
-        let ps1 = PointStruct(x: 0, y: 0)
-        var ps2 = ps1
-        ps2.x = 42
-        ps2.y = 3
-        print("ps1: \(ps1) \nps2: \(ps2)")
-        
+    func testClass() {
         let p1 = Point(x: 0, y: 0)
         let p2 = p1
         p2.x = 42
@@ -78,48 +123,15 @@ class ClassTests: XCTestCase {
         let p3 = p1.copy() as! Point
         p3.x = 100
         p3.y = 101
+        let p4 = Point(z: 3) //convenience init
+        print("p1: \(p1) \np2: \(p2) \np3: \(p3) \np4: \(p4)")
         
-        print("p1: \(p1) \np2: \(p2) \np3: \(p3)")
-        
-        let numberedP1 = NamedPoint(x: 1, y: 1, label: "first")
-        let numberedP2 = NamedPoint(point: Point(x: 1, y: 1), label: "second")
-        print("numberedP1: \(numberedP1) \nnumberedP2: \(numberedP2)")
-    }
-    
-    
-    func testInitializer() {
-        let deviceSetting1 = DeviceSetting()
-        XCTAssertNotNil(deviceSetting1)
-        
-        let deviceSetting2 = DeviceSetting(speaker: "", international: "", pin: "", tutorialTime: "")
-        XCTAssertNotNil(deviceSetting2)
-        XCTAssert(deviceSetting1.tutorialTime == nil)
-        
-        //let dev = DeviceSetting(speaker: <#T##String#>, international: <#T##String#>, access: <#T##String#>, pin: <#T##String?#>, tutorialTime: <#T##String?#>)
-        
-        //let aaa: String = deviceSetting1.pin  //Don't get compile error, but will get runtime error
+        let namedP1 = NamedPoint(x: 1, y: 2, label: "first")
+        let namedP2 = NamedPoint(point: Point(x: 3, y: 4), label: "second")
+        let namedP3 = NamedPoint(x: 200, y:201) //override init
+        print("namedP1: \(namedP1) \nnamedP2: \(namedP2) \nnamedP3: \(namedP3)")
     }
 }
-
-
-// MARK: - initializer test
-struct DeviceSetting {
-    var speaker: String = "YES"
-    var international: String = "NO"
-    
-    let access: String = "AUTO" //Both var and let won't get comiple error, but let cannot be changed in initilizer, so Memberwise initializer won't include it
-    var pin: String!
-    var tutorialTime: String?
-    
-    var isSpeakerphoneOn: Bool {
-        speaker.uppercased() == "YES"
-    }
-    
-    var useInternational: Bool {
-        return international.uppercased() == "YES"
-    }
-}
-
 
 
 
