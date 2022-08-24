@@ -46,10 +46,6 @@ class StructTests: XCTestCase {
         let deviceSetting2 = DeviceSetting(speaker: "", international: "", pin: "", tutorialTime: "")
         XCTAssertNotNil(deviceSetting2)
         XCTAssert(deviceSetting1.tutorialTime == nil)
-        
-        //let dev = DeviceSetting(speaker: <#T##String#>, international: <#T##String#>, access: <#T##String#>, pin: <#T##String?#>, tutorialTime: <#T##String?#>)
-        
-        //let aaa: String = deviceSetting1.pin  //Don't get compile error, but will get runtime error
     }
     
     
@@ -68,7 +64,8 @@ class Point {
     var y: Int
     var useless: Int?  //var do not need to set nil
 
-    init(x: Int, y: Int) {
+    //init(x: Int, y: Int) {
+    required init(x: Int, y: Int) {
         self.x = x
         self.y = y
     }
@@ -91,7 +88,8 @@ class NamedPoint: Point {
         super.init(x: point.x, y: point.y)
     }
     
-    override init(x: Int, y: Int) {
+    //override init(x: Int, y: Int) {
+    required init(x: Int, y: Int) {
         self.label = nil
         //Cannot assign x before super init like self.x = 2
         super.init(x: x, y: y)
@@ -136,9 +134,7 @@ class ClassTests: XCTestCase {
 
 
 
-/********************************************************************
- Error Handling Enum
- ********************************************************************/
+// MARK: - Error Handling Enum
 enum ServerError: Error {
     case noConnection
     case serverNotFound
@@ -164,10 +160,8 @@ func checkStatus (serverNumber: Int) throws -> String {
 }
 
 
-
-
 class ClassTests2: XCTestCase {
-    func testEnum() {
+    func testEnumcheckStatus() {
         do {
             let result = try checkStatus(serverNumber: 2)
             print(result)
@@ -177,6 +171,48 @@ class ClassTests2: XCTestCase {
 
         if let result2 = try? checkStatus(serverNumber: 3) {
             print (result2)
+        }
+    }
+    
+    enum Enum1: String {
+        case A = "hello"
+        case B = "world"
+        case C = "swift"
+    }
+    
+    func testEnum1() {
+        print(Enum1.A)
+        print(Enum1.A.rawValue)
+    }
+    
+    enum Enum2 {
+        case name(String)
+        case age(Int)
+    }
+    
+    func play(param: Enum2) {
+        switch param {
+        case Enum2.name("hello"):
+            print("hello")
+        default:
+            print("no match")
+        }
+    }
+    
+    func testEnum2() {
+        play(param: Enum2.name("hello"))
+        play(param: Enum2.name("hello2")) //no match
+    }
+    
+    enum Enum3: CaseIterable {
+        case A
+        case B
+        case C
+    }
+    
+    func testEnum3() {
+        for item  in Enum3.allCases {
+            print (item)
         }
     }
 }
